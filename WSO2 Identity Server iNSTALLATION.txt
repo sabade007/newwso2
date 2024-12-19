@@ -1,0 +1,62 @@
+##########
+WSO2 Identity Server
+##########
+1.Installing Java 11
+sudo apt install openjdk-11-jdk -y
+
+2. Check Java Version
+java -version
+
+3. Set JAVA_HOME 
+echo "export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64" >> ~/.bashrc
+echo "export PATH=$JAVA_HOME/bin:$PATH" >> ~/.bashrc
+source ~/.bashrc
+
+4. If directly running server.
+
+a. Download wso2
+wget https://github.com/wso2/product-is/releases/download/v7.0.0/wso2is-7.0.0.zip
+
+#### you can use working repo from Homesabade github named as newwso2
+
+b.Unzip it using Unzip
+sudo apt install unzip -y
+unzip wso2is-7.0.0.zip
+
+c. Move the extracted directory
+sudo mv wso2is-7.0.0 /opt/wso2is
+
+
+5. Navigate to bin directory to start the server
+ a. cd /opt/wso2is/bin
+ b. ./wso2server.sh
+
+6. Before starting the server
+ a. cd /opt/wso2is/repository/conf
+ b. sudo nano deployment.toml
+ c. Add hostname and copy the sample from MYexampledeployment folder
+ 
+ ############## Using Docker
+ 
+ 1. Download docker is from git
+ git clone https://github.com/wso2/docker-is.git
+ 
+ 2. Add to my SQL conf file 
+ sql_mode=NO_ENGINE_SUBSTITUTION
+ 
+ 3. Change the dockercompose.yml as image instead as build or else build the docker image via
+ editing Dockerfile 
+ as wso2/wso2is:latest
+ 
+ 4. in deployment.toml dont forget to add hostname and keep the node ip as it is.
+ 	in the same file.
+ 	add 
+ 	[transport.https.properties]
+	proxyPort = 443
+	
+5. finally start docker compose	up -d
+
+
+
+
+
